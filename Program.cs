@@ -1,6 +1,12 @@
+using ListaDeTarefasAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Adiciomar a string de conexão ao container
+builder.Services.AddDbContext<listaTarefasContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Somee")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

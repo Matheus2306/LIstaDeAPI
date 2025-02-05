@@ -5,6 +5,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+//adicionando CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 // Adiciomar a string de conexão ao container
 builder.Services.AddDbContext<listaTarefasContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Somee")));
 
@@ -22,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -29,3 +41,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
